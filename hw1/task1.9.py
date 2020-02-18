@@ -1,4 +1,4 @@
-#This is a function, which validate string with brackets. 
+#This is a function, which validate string with brackets.
 def brackets(str):
     if len(str) % 2 != 0:
         return "Not balanced"
@@ -14,6 +14,7 @@ def brackets(str):
         return "Balanced"
     return "Not balanced"
 str = "[][][]"
+
 print(brackets(str))
 
 brackets(str)
