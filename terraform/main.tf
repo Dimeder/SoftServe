@@ -14,4 +14,11 @@ module "VPC" {
   source = "./modules/VPC"
 }
 
+module "ALB" {
+  source = "./modules/EC2/ALB"
+  wp-public-a = module.VPC.wp-public-a
+  wp-public-b = module.VPC.wp-public-b 
+}
+
+
 

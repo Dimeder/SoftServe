@@ -1,15 +1,10 @@
-
-resource "aws_lb" "test" {
+resource "aws_lb" "Test" {
   name               = "test-lb-tf"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [module.VPC.aws_security_group.wp-site-sg.id]
-  subnets            = [module.VPC.aws_subnet.wp-private-a.id]
-
-  enable_deletion_protection = true
-
+  subnets = [var.wp-public-a, var.wp-public-b ]
 
   tags = {
-    type = "demo"
+    Name = "Test"
   }
 }
