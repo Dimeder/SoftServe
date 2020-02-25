@@ -25,3 +25,7 @@ output "wp-db-sg" {
 output "wp-bastion-sg" {
   value = module.VPC.wp-bastion-sg
 }
+output "wp-bastion-tg" {
+  value = module.LoadBalancers.wp-bastion-tg
+}
+
