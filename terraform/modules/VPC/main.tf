@@ -89,7 +89,7 @@ resource "aws_eip" "nat_private-b" {
 }
 
 resource "aws_nat_gateway" "gw-private-a" {
-  subnet_id     = aws_subnet.wp-private-a.id
+  subnet_id     = aws_subnet.wp-public-a.id
   allocation_id = aws_eip.nat_private-a.id
   tags = {
     Name = "wp-private-a"
@@ -98,7 +98,7 @@ resource "aws_nat_gateway" "gw-private-a" {
 }
 
 resource "aws_nat_gateway" "gw-private-b" {
-  subnet_id     = aws_subnet.wp-private-b.id
+  subnet_id     = aws_subnet.wp-public-b.id
   allocation_id = aws_eip.nat_private-b.id
   tags = {
     Name = "wp-private-b"
