@@ -16,6 +16,9 @@ output "wp-public-b" {
 output "wp-db-private-a" {
   value = aws_subnet.wp-db-private-a.id
 }
+output "wp-db-private-b" {
+  value = aws_subnet.wp-db-private-b.id
+}
 output "wp-site-sg" {
   value = aws_security_group.wp-site-sg.id
 }

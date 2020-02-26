@@ -64,6 +64,17 @@ resource "aws_subnet" "wp-db-private-a" {
   }
 }
 
+resource "aws_subnet" "wp-db-private-b" {
+  vpc_id            = aws_vpc.wp_vpc.id
+  cidr_block        = "10.0.6.0/24"
+  availability_zone = data.aws_availability_zones.available.names[1]
+
+  tags = {
+    Name = "wp-db-private-b"
+    type = "demo"
+  }
+}
+
 resource "aws_internet_gateway" "wp-igw" {
   vpc_id = aws_vpc.wp_vpc.id
   tags = {
@@ -137,12 +148,12 @@ resource "aws_route_table" "public-route-b" {
 }
 
 resource "aws_route_table_association" "wp-public-a" {
-  subnet_id = aws_subnet.wp-public-a.id 
+  subnet_id      = aws_subnet.wp-public-a.id
   route_table_id = aws_route_table.public-route-a.id
 }
 
 resource "aws_route_table_association" "wp-public-b" {
-  subnet_id = aws_subnet.wp-public-b.id 
+  subnet_id      = aws_subnet.wp-public-b.id
   route_table_id = aws_route_table.public-route-b.id
 }
 
@@ -152,14 +163,14 @@ resource "aws_route_table" "private-route-a" {
   vpc_id = aws_vpc.wp_vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.gw-private-a.id
   }
 
   tags = {
     Name = "private-route-a"
     type = "demo"
-    
+
   }
 }
 
@@ -167,8 +178,8 @@ resource "aws_route_table" "private-route-b" {
   vpc_id = aws_vpc.wp_vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
-    nat_gateway_id  = aws_nat_gateway.gw-private-b.id
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.gw-private-b.id
   }
 
   tags = {
@@ -178,18 +189,18 @@ resource "aws_route_table" "private-route-b" {
 }
 
 resource "aws_route_table_association" "wp-private-a" {
-  subnet_id = aws_subnet.wp-private-a.id  
+  subnet_id      = aws_subnet.wp-private-a.id
   route_table_id = aws_route_table.private-route-a.id
 }
 
 resource "aws_route_table_association" "wp-private-b" {
-  subnet_id = aws_subnet.wp-private-b.id 
+  subnet_id      = aws_subnet.wp-private-b.id
   route_table_id = aws_route_table.private-route-b.id
 }
 
 resource "aws_security_group" "wp-bastion-sg" {
-  name        = "wp-bastion-sg"
-  vpc_id      = aws_vpc.wp_vpc.id
+  name   = "wp-bastion-sg"
+  vpc_id = aws_vpc.wp_vpc.id
 
   ingress {
     from_port   = 22
@@ -200,10 +211,10 @@ resource "aws_security_group" "wp-bastion-sg" {
   }
 
   egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -213,8 +224,8 @@ resource "aws_security_group" "wp-bastion-sg" {
 }
 
 resource "aws_security_group" "wp-site-sg" {
-  name        = "wp-site-sg"
-  vpc_id      = aws_vpc.wp_vpc.id
+  name   = "wp-site-sg"
+  vpc_id = aws_vpc.wp_vpc.id
 
   ingress {
     from_port   = 80
@@ -225,18 +236,18 @@ resource "aws_security_group" "wp-site-sg" {
   }
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
     security_groups = [aws_security_group.wp-bastion-sg.id]
-    description = "Allow SSH inbound traffic from bastion host"
+    description     = "Allow SSH inbound traffic from bastion host"
   }
 
   egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -245,24 +256,23 @@ resource "aws_security_group" "wp-site-sg" {
   }
 }
 
-
 resource "aws_security_group" "wp-db-sg" {
-  name        = "wp-db-sg"
-  vpc_id      = aws_vpc.wp_vpc.id
+  name   = "wp-db-sg"
+  vpc_id = aws_vpc.wp_vpc.id
 
   ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
     security_groups = [aws_security_group.wp-site-sg.id]
-    description = "Allow 3306 inbound traffic"
+    description     = "Allow 3306 inbound traffic"
   }
 
   egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
     Name = "wp-db-sg"
