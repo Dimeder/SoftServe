@@ -2,9 +2,9 @@ resource "aws_lb" "wp-site-alb" {
   name               = "wp-site-alb"
   internal           = false
   load_balancer_type = "application"
-  subnets = [var.wp-public-a, var.wp-public-b]
-  security_groups = [var.wp-site-sg]
-  
+  subnets            = [var.wp-public-a, var.wp-public-b]
+  security_groups    = [var.wp-site-sg]
+
   tags = {
     Name = "wp-site-alb"
     type = "demo"
@@ -36,8 +36,8 @@ resource "aws_lb" "wp-bastion-elb" {
   subnets            = [var.wp-public-a, var.wp-public-b]
 
   tags = {
-     Name = "wp-bastion-elb"
-     type = "demo"
+    Name = "wp-bastion-elb"
+    type = "demo"
   }
 }
 

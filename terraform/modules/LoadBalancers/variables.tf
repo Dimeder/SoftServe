@@ -1,9 +1,12 @@
-variable "wp-public-a" { 
+variable "wp-public-a" {
+    description = "Public subnet in A-az"
 }
-variable "wp-public-b" { 
+variable "wp-public-b" {
+    description = "Public subnet in B-az"
 }
-variable "wp-site-sg" { 
+variable "wp-site-sg" {
+     description = "Security group for wordpress server"
 }
-variable "vps_id" { 
+variable "vps_id" {
+    description = "VPC id"
 }
-
