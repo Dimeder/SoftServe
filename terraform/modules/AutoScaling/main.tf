@@ -45,7 +45,7 @@ resource "aws_launch_configuration" "wp-site-lc" {
   instance_type   = "t2.micro"
   security_groups = [var.wp-site-sg]
   key_name        = var.key_name
-  user_data       = file("modules/AutoScaling/user_data.sh")
+  user_data       = data.template_file.wp-config.rendered
 
   lifecycle {
     create_before_destroy = true
@@ -61,5 +61,15 @@ resource "aws_autoscaling_group" "wp-site-ag" {
   vpc_zone_identifier  = [var.wp-private-a, var.wp-private-b]
   lifecycle {
     create_before_destroy = true
+  }
+}
+
+data "template_file" "wp-config" {
+  template = file("modules/AutoScaling/user_data.sh.tpl")
+  vars = {
+    username = var.username
+    password = var.password
+    db-endpoint = var.db-endpoint
+    name_db_instance = var.name_db_instance
   }
 }

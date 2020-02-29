@@ -38,6 +38,11 @@ module "AutoScaling" {
   wp-private-b  = module.VPC.wp-private-b
   wp-site-sg    = module.VPC.wp-site-sg
   wp-bastion-sg = module.VPC.wp-bastion-sg
+  username = module.RDS.db_username
+  password = module.RDS.db_password
+  db-endpoint = module.RDS.db-endpoint
+  name_db_instance = module.RDS.name_db_instance
+  
 }
 
 

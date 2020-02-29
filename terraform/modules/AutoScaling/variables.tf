@@ -20,3 +20,12 @@ variable "key_name" {
   description = "SSH key name"
   default = "virginia"
 }
+# Variables for user_data script
+variable "username" {
+}
+variable "password" { 
+}
+variable "db-endpoint" { 
+}
+variable "name_db_instance" { 
+}
