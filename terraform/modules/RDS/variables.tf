@@ -10,7 +10,7 @@ variable "name_db" {
   description = "db name"
   default     = ""
 }
-variable "wp-db-private-a" {
+girvariable "wp-db-private-a" {
   description = "Private subnet in A-az"
 }
 variable "wp-db-private-b" {

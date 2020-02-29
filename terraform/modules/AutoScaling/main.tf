@@ -55,8 +55,9 @@ resource "aws_launch_configuration" "wp-site-lc" {
 resource "aws_autoscaling_group" "wp-site-ag" {
   name                 = "wp-site-ag"
   launch_configuration = aws_launch_configuration.wp-site-lc.id
-  min_size             = 1
-  max_size             = 1
+  min_size             = 2
+  max_size             = 2
+  health_check_type    = "EC2"
   target_group_arns    = [var.wp-site-tg]
   vpc_zone_identifier  = [var.wp-private-a, var.wp-private-b]
   lifecycle {
@@ -71,5 +72,6 @@ data "template_file" "wp-config" {
     password = var.password
     db-endpoint = var.db-endpoint
     name_db_instance = var.name_db_instance
+    alb-endpoint = var.alb-endpoint
   }
 }

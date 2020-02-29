@@ -69,6 +69,8 @@ define( 'AUTH_SALT',        '<I0N8}8de!}d<yB|; P&:=T^UX|7q7sETq ID!.FynA3/ PAmtk
 define( 'SECURE_AUTH_SALT', ' K15&)7{o=cJ!g!z HYahRNQk6%;7an/LLrx%dsFt;WtR{H+`n1vzwZUA0oxlWM(' );
 define( 'LOGGED_IN_SALT',   'q#5% z2ebQ1Isct8%Vg9An:IY86q8PIQ3o,uX%*a$+E{wC6RdM>;p;q[O++xoWCN' );
 define( 'NONCE_SALT',       'VeZ{n V;3:Hb r|i-ym^R/RbN=615:GICb[zy<y[dSoQ?,{ay{qJ6#YKNMVJc_##' );
+define('WP_HOME','http://${ alb-endpoint }');
+define('WP_SITEURL','http://${ alb-endpoint }');
 
 /**#@-*/
 

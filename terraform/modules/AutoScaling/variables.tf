@@ -29,3 +29,5 @@ variable "db-endpoint" {
 }
 variable "name_db_instance" { 
 }
+variable "alb-endpoint" { 
+}

@@ -42,6 +42,7 @@ module "AutoScaling" {
   password = module.RDS.db_password
   db-endpoint = module.RDS.db-endpoint
   name_db_instance = module.RDS.name_db_instance
+  alb-endpoint = module.LoadBalancers.wordpress_dns
   
 }
 
