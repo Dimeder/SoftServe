@@ -21,7 +21,7 @@ resource "aws_launch_configuration" "wp-bastion-lc" {
   instance_type   = "t2.micro"
   security_groups = [var.wp-bastion-sg]
   key_name        = var.key_name
-  
+
   lifecycle {
     create_before_destroy = true
   }
@@ -68,10 +68,10 @@ resource "aws_autoscaling_group" "wp-site-ag" {
 data "template_file" "wp-config" {
   template = file("modules/AutoScaling/user_data.sh.tpl")
   vars = {
-    username = var.username
-    password = var.password
-    db-endpoint = var.db-endpoint
+    username         = var.username
+    password         = var.password
+    db-endpoint      = var.db-endpoint
     name_db_instance = var.name_db_instance
-    alb-endpoint = var.alb-endpoint
+    alb-endpoint     = var.alb-endpoint
   }
 }

@@ -31,19 +31,19 @@ module "LoadBalancers" {
 }
 
 module "AutoScaling" {
-  source        = "./modules/AutoScaling"
-  wp-bastion-tg = module.LoadBalancers.wp-bastion-tg
-  wp-site-tg    = module.LoadBalancers.wp-site-tg
-  wp-private-a  = module.VPC.wp-private-a
-  wp-private-b  = module.VPC.wp-private-b
-  wp-site-sg    = module.VPC.wp-site-sg
-  wp-bastion-sg = module.VPC.wp-bastion-sg
-  username = module.RDS.db_username
-  password = module.RDS.db_password
-  db-endpoint = module.RDS.db-endpoint
+  source           = "./modules/AutoScaling"
+  wp-bastion-tg    = module.LoadBalancers.wp-bastion-tg
+  wp-site-tg       = module.LoadBalancers.wp-site-tg
+  wp-private-a     = module.VPC.wp-private-a
+  wp-private-b     = module.VPC.wp-private-b
+  wp-site-sg       = module.VPC.wp-site-sg
+  wp-bastion-sg    = module.VPC.wp-bastion-sg
+  username         = module.RDS.db_username
+  password         = module.RDS.db_password
+  db-endpoint      = module.RDS.db-endpoint
   name_db_instance = module.RDS.name_db_instance
-  alb-endpoint = module.LoadBalancers.wordpress_dns
-  
+  alb-endpoint     = module.LoadBalancers.wordpress_dns
+
 }
 
 
