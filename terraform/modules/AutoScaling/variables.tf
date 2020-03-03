@@ -19,6 +19,7 @@ variable "wp-bastion-sg" {
 variable "key_name" {
   description = "SSH key name"
   default     = "virginia"
+# default     = "Ohio"
 }
 # Variables for user_data script
 variable "username" {
