@@ -1,8 +1,8 @@
 #!/bin/bash
 yum update -y
-yum install httpd php php-mysql -y
+amazon-linux-extras install php7.2 -y 
+yum install httpd -y
 cd /var/www/html
-echo "healthy" > healthy.html
 wget https://wordpress.org/wordpress-5.3.2.tar.gz
 tar -xzf wordpress-5.3.2.tar.gz
 cp -r wordpress/* /var/www/html/
