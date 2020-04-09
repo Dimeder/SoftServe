@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: post-conf
+data:
+  POSTPORT: "8082"
+  BACKPORT: "8083"
+  BACKADDR: "back-srv"
