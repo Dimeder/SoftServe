@@ -52,10 +52,6 @@ resource "aws_iam_user" "github" {
   }
 }
 
-resource "aws_iam_access_key" "github" {
-  user    = aws_iam_user.github.id
-}
-
 resource "aws_iam_user_group_membership" "github" {
   user   = aws_iam_user.github.id
   groups = [aws_iam_group.github.id]

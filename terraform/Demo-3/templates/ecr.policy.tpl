@@ -2,9 +2,9 @@
     "rules": [
         {
             "rulePriority": 1,
-            "description": "Keep only one untagged image",
+            "description": "Keep only one tagged image",
             "selection": {
-                "tagStatus": "untagged",
+                "tagStatus": "any",
                 "countType": "imageCountMoreThan",
                 "countNumber": 1
             },
