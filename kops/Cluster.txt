@@ -1,0 +1,22 @@
+export NAME=dimeder.pp.ua
+export KOPS_STATE_STORE=s3://dimeder.pp.ua
+
+kops create cluster --zones us-east-1a ${NAME} \
+--master-size=t2.micro \
+--node-size=t2.micro \
+--master-volume-size=8 \
+--node-volume-size=8
+
+kops delete cluster --name ${NAME} --yes
+
+etcdClusters:
+  - etcdMembers:
+    - instanceGroup: master-eu-central-1a
+      name: a
+      volumeSize: 2 # add this line
+    name: main
+  - etcdMembers:
+    - instanceGroup: master-eu-central-1a
+      name: a
+      volumeSize: 2 # add this line
+    name: events

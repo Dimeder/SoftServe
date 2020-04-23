@@ -1,0 +1,26 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: stilton
+  labels:
+    app: cheese
+    cheese: stilton
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cheese
+      task: stilton
+  template:
+    metadata:
+      labels:
+        app: cheese
+        task: stilton
+        version: v0.0.1
+    spec:
+      containers:
+      - name: cheese
+        image: errm/cheese:stilton
+        ports:
+        - containerPort: 80
