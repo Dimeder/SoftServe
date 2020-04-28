@@ -1,0 +1,50 @@
+---
+- name: Installing  required packages for ubuntu & Debian
+  apt: name="{{ packages }}" update_cache=yes state=present
+  vars:
+    packages:
+    - apache2
+    - libapache2-mod-wsgi
+    - python-geoip
+    - python-ipaddr
+    - python-humanize
+    - python-bottle
+    - python-semantic-version
+    - geoip-database-extra
+    - geoipupdate
+
+- name: Creating a file in apache2 directory for ubuntu & Debian
+  file:
+    path: /etc/apache2/conf-available/openvpn-monitor.conf
+    state: touch
+    mode: "u=rw,g=r,o=r"
+
+- name: Deleting apache2 home-page from apache2 directory
+  file:
+    path: /var/www/html/index.html
+    state: absent
+
+- name: configuring apache2 for openvpn-monitor for ubuntu & Debian
+  lineinfile:
+    path: /etc/apache2/conf-available/openvpn-monitor.conf
+    insertafter: EOF
+    line: 'WSGIScriptAlias /openvpn-monitor /var/www/html/openvpn-monitor/openvpn-monitor.py'
+
+- name: enable openvpn-monitor configuration ubuntu & Debian
+  command: a2enconf openvpn-monitor
+
+- name: Creating openvpn-monitor directory
+  file:
+    path: /var/www/html/openvpn-monitor
+    state: directory
+
+- name: Cloning Openvpn-monitor source-code
+  git:
+    repo: "{{ openvpn-monitor-giturl }}"
+    dest: /var/www/html/openvpn-monitor/
+  
+
+- name: restart apache2 ubuntu & Debian
+  service: 
+    name: apache2
+    state: restarted

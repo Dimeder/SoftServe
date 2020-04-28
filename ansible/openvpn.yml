@@ -1,0 +1,8 @@
+---
+- name: It will automate OpenVPN setup
+  hosts: dev
+  become: yes
+  gather_facts: false
+  
+  roles:
+    - role: openvpn

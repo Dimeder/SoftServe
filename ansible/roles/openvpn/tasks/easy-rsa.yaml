@@ -1,0 +1,11 @@
+---
+- name: Download and Unarchiving easy-rsa
+  unarchive:
+    src: "{{ easy_rsa_url }}"
+    dest: /tmp/
+    remote_src: yes
+
+- name: Copying rsa files to the working directory
+  command: cp -r /tmp/{{ easy_rsa_pkg }} {{ base_directory }}/easy-rsa
+  args:
+    creates: "{{ base_directory }}/easy-rsa"
